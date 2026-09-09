@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weather Dashboard</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2k6kPq1r8gkQ+kq1a0Zb4r1o+gXW6mZ6b0z9vYw=" crossorigin=""/>
+  <!-- Weather Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" integrity="sha512-0sJk3bZK6n/x3X0Gq4vQ0Msq8Yp2eG2kQF1Q1lQ5D6gqYhZgq/7qj6m0iZ7bM3X3sKf6Yb6wQXc0p9nH1l1b2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-VJx7z2G2zFJ0J6xXK6g3GQ7J9GQx1cQ1b7x1b7x1b7A=" crossorigin=""></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Weather Dashboard</h1>
+    <div class="controls">
+      <div class="search">
+        <label for="city-input" class="visually-hidden">搜索城市</label>
+        <input id="city-input" placeholder="输入城市或邮编，例如：Beijing" autocomplete="off" />
+        <ul id="suggestions" class="suggestions" role="listbox" aria-label="搜索建议"></ul>
+      </div>
+
+      <div class="unit-toggle" title="切换 温度 单位">
+        <button id="unitBtn">°C</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="left-column">
+      <div id="map" class="map card"></div>
+
+      <section id="current" class="card current" aria-live="polite">
+        <h2 id="location">—</h2>
+        <div class="current-row">
+          <div class="temp" id="temp">— °C</div>
+          <div class="desc" id="desc">加载中…</div>
+        </div>
+        <div class="meta">
+          <div>风速: <span id="wind">— m/s</span></div>
+          <div>气压: <span id="pressure">— hPa</span></div>
+        </div>
+      </section>
+
+      <section id="hours" class="card hours">
+        <h3>小时预报（24 小时）</h3>
+        <div id="hours-list" class="hours-list"></div>
+      </section>
+    </section>
+
+    <aside class="right-column">
+      <section id="forecast" class="card forecast">
+        <h3>7 天预报</h3>
+        <div id="days" class="days-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="chart-card" class="card chart-card">
+        <h3>温度与降雨概率（24 小时）</h3>
+        <canvas id="tempChart" width="400" height="220" aria-label="温度和降雨概率图表" role="img"></canvas>
+      </section>
+    </aside>
+  </main>
+
+  <footer class="footer">
+    数据来源：Open-Meteo (https://open-meteo.com/) — 无需 API Key · 地图瓦片: OpenStreetMap
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
